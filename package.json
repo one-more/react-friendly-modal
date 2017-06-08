@@ -2,7 +2,7 @@
   "name": "react-friendly-modal",
   "version": "1.0.0",
   "description": "react modal dialog",
-  "main": "build/bundle.js",
+  "main": "dist/bundle.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/one-more/react-friendly-modal.git"
