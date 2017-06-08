@@ -10,7 +10,8 @@ type State = {
     onRequestClose: Function,
     className: string,
     style: Object,
-    isOpen: boolean
+    isOpen: boolean,
+    overlayProps: Object
 };
 
 export default function modalComponentHOC(subscribe: Function, initialProps: State) {
@@ -31,7 +32,8 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
             onRequestClose: noop,
             className: '',
             style: {},
-            isOpen: false
+            isOpen: false,
+            overlayProps: {}
         };
 
         onContentClick = (e: SyntheticEvent) => {
@@ -41,7 +43,7 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
 
         render() {
             const {
-                children, onRequestClose, style, isOpen
+                children, onRequestClose, style, isOpen, overlayProps
             } = this.state;
             const className = {
                 modal: true,
@@ -49,10 +51,11 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
             };
             return (
                 <div
-                    className={map(className, (v,k) => v ? k : undefined).join(' ')}
+                    className={map(className, (v, k) => (v ? k : undefined)).join(' ')}
                 >
                     <div
-                        className="modal__overlay"
+                        {...overlayProps}
+                        className={`modal__overlay ${overlayProps.className}`}
                     />
                     <div
                         className="modal__body"

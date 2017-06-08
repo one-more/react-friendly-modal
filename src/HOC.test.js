@@ -9,6 +9,12 @@ const style = {
 };
 const className = 'testCN';
 const styleName = 'modal';
+const overlayProps = {
+    className: 'overlay CN',
+    style: {
+        opacity: 0.5
+    }
+};
 const initialProps = {
     children: <div>
         <div id="1">1</div>
@@ -18,7 +24,8 @@ const initialProps = {
     styleName,
     onRequestClose,
     className,
-    style
+    style,
+    overlayProps
 };
 const Component = HOC(onChange => (updateComponent = onChange), initialProps);
 
@@ -30,6 +37,8 @@ describe('Modal HOC', () => {
         }
         expect(wrapper.find('.modal__content').props().className).toContain(className);
         expect(wrapper.find('.modal__body').props().style).toEqual(style);
+        expect(wrapper.find('.modal__overlay').props().className).toContain(overlayProps.className);
+        expect(wrapper.find('.modal__overlay').props().style).toEqual(overlayProps.style);
         wrapper.find('.modal__body').simulate('click');
         expect(onRequestClose).toHaveBeenCalled();
 

@@ -17,7 +17,8 @@
         "jest": true
     },
     "globals": {
-        "DEBUG": false
+        "DEBUG": false,
+        "SyntheticEvent": true
     },
     "rules": {
         "indent": ["error", 4, {"SwitchCase": 1}],

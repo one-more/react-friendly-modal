@@ -15,7 +15,13 @@ jest.mock('./HOC', () => (...args) => {
                 width: 200
             },
             children: <div>1</div>,
-            onRequestClose: expect.any(Function)
+            onRequestClose: expect.any(Function),
+            overlayProps: {
+                className: 'overlay CN',
+                style: {
+                    opacity: 0.5
+                }
+            }
         }
     ]);
     return require.requireActual('./HOC').default(...args);
@@ -29,6 +35,12 @@ describe('Modal', () => {
         className: 'test CN',
         style: {
             width: 200
+        },
+        overlayProps: {
+            className: 'overlay CN',
+            style: {
+                opacity: 0.5
+            }
         }
     };
 

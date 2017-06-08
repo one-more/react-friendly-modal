@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
 import Modal from './index';
 
 class ModalOwner extends Component {
+    static propTypes = {
+        title: PropTypes.string,
+        style: PropTypes.object,
+        className: PropTypes.string
+    };
+
+    static defaultProps = {
+        title: '',
+        style: {},
+        className: ''
+    };
+
     state = {
         isOpen: false
     };
@@ -42,6 +55,7 @@ storiesOf('Modal')
                 </div>
             </ModalOwner>
         </ModalOwner>
+        <br />
         <ModalOwner title="second modal" >
             <div>second modal content</div>
         </ModalOwner>

@@ -76,13 +76,16 @@
     "build-prod": "cross-env NODE_ENV=production webpack -p",
     "deploy-storybook": "storybook-to-ghpages",
     "git-add": "git add -u",
-    "flow": "flow"
+    "flow": "flow",
+    "eslint": "eslint \"src/**/*.js\""
   },
   "pre-commit": {
     "silent": true,
     "run": [
       "build-prod",
       "test",
+      "flow",
+      "eslint",
       "git-add"
     ]
   },
