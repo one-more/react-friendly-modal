@@ -2,6 +2,7 @@ import React from 'react';
 import {mount} from 'enzyme';
 import DOM from 'react-dom';
 import Modal from './index';
+import {activeModals} from './utils';
 
 jest.mock('./HOC', () => (...args) => {
     expect(args).toEqual([
@@ -16,12 +17,7 @@ jest.mock('./HOC', () => (...args) => {
             },
             children: <div>1</div>,
             onRequestClose: expect.any(Function),
-            overlayProps: {
-                className: 'overlay CN',
-                style: {
-                    opacity: 0.5
-                }
-            }
+            overlayProps: {}
         }
     ]);
     return require.requireActual('./HOC').default(...args);
@@ -35,12 +31,6 @@ describe('Modal', () => {
         className: 'test CN',
         style: {
             width: 200
-        },
-        overlayProps: {
-            className: 'overlay CN',
-            style: {
-                opacity: 0.5
-            }
         }
     };
 
@@ -61,16 +51,17 @@ describe('Modal', () => {
         expect(spyDOM).toHaveBeenCalled();
         // parent node was removed
         expect(document.body.innerHTML).toEqual('');
+
+        wrapper.unmount();
     });
 
     it('on update', () => {
         const POSITION_FIXED = 'fixed';
-        props.isOpen = false;
         const root = document.createElement('div');
         root.id = 'root';
         root.setAttribute('data-reactroot', '');
         document.body.appendChild(root);
-        const wrapper = mount(<Modal {...props} >
+        const wrapper = mount(<Modal {...props} isOpen={false} >
             <div>1</div>
         </Modal>);
         expect(document.querySelector('#root').style.position).toEqual('');
@@ -104,5 +95,44 @@ describe('Modal', () => {
         });
         expect(document.querySelector('#root').style.position).toEqual(POSITION_FIXED);
         expect(document.body.scrollTop).toEqual(styleTop);
+
+        wrapper.unmount();
+    });
+
+    it('close on esc', () => {
+        const wrapper = mount(<Modal {...props} >
+            <div>1</div>
+        </Modal>);
+        expect(activeModals.modals).toHaveLength(1);
+        wrapper.unmount();
+        expect(activeModals.modals).toHaveLength(0);
+
+        const first = mount(<Modal
+            {...props}
+            isOpen={false}
+            onRequestClose={() => first.setProps({isOpen: false})}
+        >
+            <div>1</div>
+        </Modal>);
+        expect(activeModals.modals).toHaveLength(0);
+        first.setProps({
+            isOpen: true
+        });
+        expect(activeModals.modals).toHaveLength(1);
+        const second = mount(<Modal
+            {...props}
+            onRequestClose={() => second.setProps({isOpen: false})}
+        >
+            <div>1</div>
+        </Modal>);
+        expect(activeModals.modals).toHaveLength(2);
+
+        const event = new window.KeyboardEvent('keydown', {
+            keyCode: 27
+        });
+        document.dispatchEvent(event);
+        expect(activeModals.modals).toHaveLength(1);
+        document.dispatchEvent(event);
+        expect(activeModals.modals).toHaveLength(0);
     });
 });

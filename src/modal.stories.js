@@ -52,6 +52,9 @@ storiesOf('Modal')
             <ModalOwner title="third modal" className="test" >
                 <div style={{width: 500, height: 800}}>
                     third modal content
+                    <ModalOwner title="fourth modal" >
+                        fourth modal content
+                    </ModalOwner>
                 </div>
             </ModalOwner>
         </ModalOwner>

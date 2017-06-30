@@ -6,7 +6,6 @@ import map from 'lodash/map';
 
 type State = {
     children: any,
-    styleName: string,
     onRequestClose: Function,
     className: string,
     style: Object,
@@ -28,7 +27,6 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
 
         state: State = {
             children: null,
-            styleName: '',
             onRequestClose: noop,
             className: '',
             style: {},
