@@ -8,5 +8,6 @@ export type ModalProps = {
     appSelector: string,
     style: Object,
     children?: any,
-    overlayProps: Object
+    animation: string,
+    closeOnOverlayClick?: boolean
 }

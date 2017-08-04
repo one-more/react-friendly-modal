@@ -25,7 +25,9 @@
   },
   "dependencies": {
     "invariant": "^2.2.2",
-    "lodash": "^4.17.4"
+    "javascript-state-machine": "^3.0.1",
+    "lodash": "^4.17.4",
+    "styled-components": "^2.1.2"
   },
   "devDependencies": {
     "@kadira/storybook-deployer": "^1.2.0",

@@ -11,13 +11,15 @@ jest.mock('./HOC', () => (...args) => {
             appSelector: 'body [data-reactroot]',
             parentSelector: 'body',
             isOpen: expect.any(Boolean),
-            className: 'test CN',
+            className: '',
             style: {
                 width: 200
             },
+            animation: '',
+            isAnimated: false,
+            styleName: 'test CN',
             children: <div>1</div>,
-            onRequestClose: expect.any(Function),
-            overlayProps: {}
+            onRequestClose: expect.any(Function)
         }
     ]);
     return require.requireActual('./HOC').default(...args);
@@ -29,6 +31,8 @@ describe('Modal', () => {
         parentSelector: 'body',
         isOpen: true,
         className: 'test CN',
+        animation: '',
+        isAnimated: false,
         style: {
             width: 200
         }

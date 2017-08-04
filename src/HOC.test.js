@@ -7,25 +7,16 @@ const onRequestClose = jest.fn();
 const style = {
     textAlign: 'center'
 };
-const className = 'testCN';
-const styleName = 'modal';
-const overlayProps = {
-    className: 'overlay CN',
-    style: {
-        opacity: 0.5
-    }
-};
+const className = 'modal';
 const initialProps = {
     children: <div>
         <div id="1">1</div>
         <div id="2">2</div>
         <div id="3">3</div>
     </div>,
-    styleName,
     onRequestClose,
     className,
-    style,
-    overlayProps
+    style
 };
 const Component = HOC(onChange => (updateComponent = onChange), initialProps);
 
@@ -35,12 +26,10 @@ describe('Modal HOC', () => {
         for (let i = 1; i < 4; i += 1) {
             expect(wrapper.find(`#${i}`)).toHaveLength(1);
         }
-        expect(wrapper.find('.modal__content').props().className).toContain(className);
-        expect(wrapper.find('.modal__body').props().style).toEqual(style);
-        expect(wrapper.find('.modal__overlay').props().className).toContain(overlayProps.className);
-        expect(wrapper.find('.modal__overlay').props().style).toEqual(overlayProps.style);
-        wrapper.find('.modal__body').simulate('click');
-        expect(onRequestClose).toHaveBeenCalled();
+        expect(wrapper.find('[data-selenium="modal-content"]').props().className).toContain(className);
+        expect(wrapper.find('[data-selenium="modal-content"]').props().style).toEqual(style);
+        wrapper.find('[data-selenium="modal-body"]').simulate('click');
+        expect(onRequestClose).not.toHaveBeenCalled();
 
         updateComponent({
             children: <div>
@@ -51,5 +40,15 @@ describe('Modal HOC', () => {
         for (let i = 1; i < 4; i += 1) {
             expect(wrapper.find(`#${i}`)).toHaveLength(0);
         }
+    });
+
+    it('close on overlay click', () => {
+        const ComponentCloseOnOverlay = HOC(onChange => (updateComponent = onChange), {
+            ...initialProps,
+            closeOnOverlayClick: true
+        });
+        const wrapper = mount(<ComponentCloseOnOverlay />);
+        wrapper.find('[data-selenium="modal-body"]').simulate('click');
+        expect(onRequestClose).toHaveBeenCalled();
     });
 });

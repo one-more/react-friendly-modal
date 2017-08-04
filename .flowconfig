@@ -13,3 +13,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
 
 [ignore]
 .*/stylelint/.*
+.*/styled-components/src/.*

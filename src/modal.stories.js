@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {storiesOf} from '@storybook/react';
+import {storiesOf} from '@kadira/storybook';
 import Modal from './index';
 
 class ModalOwner extends Component {
@@ -46,20 +46,16 @@ class ModalOwner extends Component {
 }
 
 storiesOf('Modal')
-    .add('default', () => <div style={{height: 600, paddingTop: 200}} >
+    .add('default', () => (<div style={{height: 600, paddingTop: 200}} >
         <ModalOwner title="first modal" >
             <div>first modal content</div>
             <ModalOwner title="third modal" className="test" >
                 <div style={{width: 500, height: 800}}>
                     third modal content
-                    <ModalOwner title="fourth modal" >
-                        fourth modal content
-                    </ModalOwner>
                 </div>
             </ModalOwner>
         </ModalOwner>
-        <br />
         <ModalOwner title="second modal" >
             <div>second modal content</div>
         </ModalOwner>
-    </div>);
+    </div>));
