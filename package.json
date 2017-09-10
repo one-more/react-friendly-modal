@@ -84,7 +84,7 @@
   "pre-commit": {
     "silent": true,
     "run": [
-      "build-prod",
+      "build",
       "test",
       "flow",
       "eslint",
