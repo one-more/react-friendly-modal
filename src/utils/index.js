@@ -33,5 +33,9 @@ export const activeModals = {
 
     isOnTop(modal: Modal) {
         return this.modals.slice(-1)[0] === modal;
+    },
+
+    isEmpty() {
+        return this.modals.length === 0;
     }
 };

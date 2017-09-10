@@ -69,10 +69,10 @@ describe('Modal', () => {
             <div>1</div>
         </Modal>);
         expect(document.querySelector('#root').style.position).toEqual('');
-        expect(document.body.scrollTop).toEqual(0);
+        expect(document.documentElement.scrollTop).toEqual(0);
 
         const scrollTop = 123;
-        document.body.scrollTop = scrollTop;
+        document.documentElement.scrollTop = scrollTop;
         wrapper.setProps({
             isOpen: true
         });
@@ -84,7 +84,7 @@ describe('Modal', () => {
             isOpen: false
         });
         expect(document.querySelector('#root').style.position).toEqual('');
-        expect(document.body.scrollTop).toEqual(scrollTop);
+        expect(document.documentElement.scrollTop).toEqual(scrollTop);
 
         const styleTop = 321;
         app.style.top = `${styleTop}px`;
@@ -98,7 +98,7 @@ describe('Modal', () => {
             isOpen: false
         });
         expect(document.querySelector('#root').style.position).toEqual(POSITION_FIXED);
-        expect(document.body.scrollTop).toEqual(styleTop);
+        expect(document.documentElement.scrollTop).toEqual(styleTop);
 
         wrapper.unmount();
     });

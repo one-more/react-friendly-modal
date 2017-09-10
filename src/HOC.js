@@ -47,12 +47,22 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
             };
         }
 
+        mapCloseToNextState = () => {
+            const {animation} = this.state;
+            return animation ? states.requestOpen : states.open;
+        };
+
+        mapOpenToNextState = () => {
+            const {animation} = this.state;
+            return animation ? states.requestClose : states.close;
+        };
+
         stateMachine: Object = new StateMachine({
             init: states.close,
             transitions: [
-                {name: 'next', from: states.close, to: states.requestOpen},
+                {name: 'next', from: states.close, to: this.mapCloseToNextState},
                 {name: 'next', from: states.requestOpen, to: states.open},
-                {name: 'next', from: states.open, to: states.requestClose},
+                {name: 'next', from: states.open, to: this.mapOpenToNextState},
                 {name: 'next', from: states.requestClose, to: states.close}
             ]
         });
@@ -188,7 +198,7 @@ function mapAnimationToStyles(state: string, animation: string) {
                 transform: ${mapStateToTransform(state)};
                 animation: ${mapStateToAnimation(state, animation)} .5s linear;
                 
-                @media screen and (max-width: 1184px) {
+                @media screen and (max-width: 600px) {
                     left: 0;
                 }
                 

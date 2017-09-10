@@ -44,8 +44,8 @@ export default class Modal extends Component {
         const {isOpen} = this.props;
         const {isOpen: nextIsOPen} = nextProps;
         if (isOpen !== nextIsOPen) {
-            this.toggleAppFixed(nextIsOPen);
             activeModals.toggle(this);
+            this.toggleAppFixed(nextIsOPen);
         }
     }
 
@@ -92,12 +92,12 @@ export default class Modal extends Component {
         const {appSelector} = this.props;
         const app = document.querySelector(appSelector);
         invariant(app, 'invalid app selector');
-        const {body} = document;
-        invariant(body, 'body should be initialized');
+        const {documentElement} = document;
+        invariant(documentElement, 'document should be initialized');
         if (isOpen) {
             const appStyles = getComputedStyle(app);
             this.oldPosition = appStyles.position;
-            this.oldScrollTop = Math.abs(parseInt(appStyles.top, 10)) || body.scrollTop;
+            this.oldScrollTop = Math.abs(parseInt(appStyles.top, 10)) || documentElement.scrollTop;
             app.style.position = 'fixed';
             app.style.left = '0';
             app.style.right = '0';
@@ -108,7 +108,10 @@ export default class Modal extends Component {
                 app.style.position = oldPosition;
                 app.style.left = 'auto';
                 app.style.right = 'auto';
-                body.scrollTop = oldScrollTop;
+                documentElement.scrollTop = oldScrollTop;
+            }
+            if(activeModals.isEmpty()) {
+                app.style.top = ''
             }
         }
     }

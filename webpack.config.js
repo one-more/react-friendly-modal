@@ -18,14 +18,6 @@ module.exports = {
                 test: /\.js$/,
                 exclude: [/node_modules/],
                 use: 'babel-loader'
-            },
-            {
-                test: /\.styl$/,
-                use: ExtractTextPlugin.extract(['css-loader', 'stylus-loader'])
-            },
-            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract(['css-loader'])
             }
         ]
     },
@@ -42,7 +34,7 @@ module.exports = {
             'node_modules',
             path.join(__dirname, 'src')
         ],
-        extensions: ['.js', '.styl', 'css']
+        extensions: ['.js']
     },
     externals: {
         react: {

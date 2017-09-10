@@ -26,12 +26,14 @@ import Modal from 'react-friendly-modal';
 ````
 
 ## props
-| name | default value |
-|------|---------------|
-| isOpen | false|
-| onRequestClose | empty function |
-| className | empty string |
-| appSelector | body [data-reactroot] |
-| style | {} |
-| parentSelector | body |
-| overlayProps | {} |
+| name | default value | allowed values |
+|------|---------------|----------------|
+| isOpen | false| boolean |
+| onRequestClose | empty function | function |
+| className | empty string | string |
+| appSelector | body [data-reactroot] | string |
+| style | {} | object |
+| parentSelector | body | string |
+| overlayProps | {} | object |
+| closeOnOverlayClick | false | boolean |
+| animation | '' | 'right-to-left' |

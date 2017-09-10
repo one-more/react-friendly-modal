@@ -20,15 +20,6 @@ module.exports = {
         // your custom plugins
     ],
     module: {
-        rules: [
-            {
-                test: /\.css$/,
-                loader: 'style!css!postcss!resolve-url'
-            },
-            {
-                test: /\.(styl)$/,
-                loader: 'style!css!postcss!resolve-url!stylus'
-            },
-        ],
+        rules: [],
     },
 };
