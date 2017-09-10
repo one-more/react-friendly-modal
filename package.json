@@ -77,7 +77,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress",
     "build-prod": "cross-env NODE_ENV=production webpack -p",
     "deploy-storybook": "storybook-to-ghpages",
-    "git-add": "git add -u",
+    "git-add": "git add . -u",
     "flow": "flow",
     "eslint": "eslint \"src/**/*.js\""
   },

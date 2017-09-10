@@ -28,29 +28,9 @@ module.exports = {
         extensions: ['.js']
     },
     externals: {
-        react: {
-            commonjs: 'react',
-            commonjs2: 'react',
-            amd: 'react',
-            root: 'React'
-        },
-        'react-dom': {
-            commonjs: 'react-dom',
-            commonjs2: 'react-dom',
-            amd: 'react-dom',
-            root: 'ReactDom'
-        },
-        lodash: {
-            commonjs: 'lodash',
-            commonjs2: 'lodash',
-            amd: 'lodash',
-            root: '_'
-        },
-        'styled-components': {
-            commonjs: 'styled-components',
-            commonjs2: 'styled-components',
-            amd: 'styled-components',
-            root: 'styled-components'
-        }
+        "react": "react",
+        "react-dom": "react-dom",
+        "lodash": "lodash",
+        "styled-components": "styled-components"
     }
 };
