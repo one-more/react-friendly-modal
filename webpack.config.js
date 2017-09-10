@@ -1,5 +1,4 @@
 const webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
     path = require('path');
 
 module.exports = {
@@ -21,14 +20,6 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        new ExtractTextPlugin('bundle.css')
-    ],
     resolve: {
         modules: [
             'node_modules',
@@ -54,6 +45,12 @@ module.exports = {
             commonjs2: 'lodash',
             amd: 'lodash',
             root: '_'
+        },
+        'styled-components': {
+            commonjs: 'styled-components',
+            commonjs2: 'styled-components',
+            amd: 'styled-components',
+            root: 'styled-components'
         }
     }
 };
