@@ -115,7 +115,8 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
                 animation,
                 state,
                 closeOnOverlayClick,
-                className
+                className,
+                isOpen
             } = this.state;
 
             return (
@@ -139,7 +140,7 @@ export default function modalComponentHOC(subscribe: Function, initialProps: Sta
                             state={state}
                             onAnimationEnd={this.nextState}
                         >
-                            {children}
+                            {isOpen && children}
                         </ModalContent>
                     </ModalBody>
                 </Modal>

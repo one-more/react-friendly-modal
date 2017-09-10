@@ -16,7 +16,8 @@ const initialProps = {
     </div>,
     onRequestClose,
     className,
-    style
+    style,
+    isOpen: true
 };
 const Component = HOC(onChange => (updateComponent = onChange), initialProps);
 
